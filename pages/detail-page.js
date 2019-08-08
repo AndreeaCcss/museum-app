@@ -323,11 +323,25 @@ const data = {
       }
     ]
 }
+const paintings = data.artObjects;
+let selectedPaintings = [];
+
+for(i = 0; i < paintings.length; i++){
+    let year = paintings[i].longTitle;
+    year = year.substring(year.length - 4, year.length);
+
+    let title = paintings[i].principalOrFirstMaker;
+    let width = paintings[i].webImage.width;
+
+    if(width > 500 && year < 1800 &&  title !== "Gerard van Honthorst") {
+        selectedPaintings.push(paintings[i]);
+    };
+};
 
 const h1 = document.getElementById("header");
-h1.textContent = data.artObjects[0].title + ", " + data.artObjects[0].principalOrFirstMaker;
+h1.textContent = selectedPaintings[0].title + ", " + selectedPaintings[0].principalOrFirstMaker;
 const img = document.getElementById("artObject");
-img.src = data.artObjects[0].webImage.url
+img.src = selectedPaintings[0].webImage.url
 
 let inappropriateWords = ["bananas", "balanas", "bamanas"];
 
