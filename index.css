@@ -41,8 +41,9 @@ div {
     margin: 2em;
 }
 
-i {
+i{
     cursor: pointer;
+    
 }
 
 #likes {

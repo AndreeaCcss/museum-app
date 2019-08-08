@@ -341,6 +341,7 @@ function displayPainting(painting) {
     img.alt = title;
     i.setAttribute("class",  "fas fa-heart fa-2x");
     i.setAttribute("id", title)
+    // i.style = "color: #ff6b6b";
 
     a.appendChild(img);
     figure.appendChild(i)
@@ -398,6 +399,8 @@ iElementsArray.forEach(function(painting) {
         const listItem = document.createElement("li");
         listItem.textContent = painting.id;
         list.appendChild(listItem);
+
+        painting.style = "color: #ff6b6b";
     });
 });
 
