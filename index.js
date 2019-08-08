@@ -331,33 +331,81 @@ function displayPainting(painting) {
 
     const a = document.createElement("a");
     const img = document.createElement("img");
+    const i = document.createElement("i");
+    const figure = document.createElement("figure");
+    const div = document.createElement("div");
 
     a.href = "./pages/detail-page.html";
     img.setAttribute("src", source);
-    img.setAttribute("class", "artObject")
+    img.setAttribute("class", "artObject");
     img.alt = title;
+    i.setAttribute("class",  "fas fa-heart fa-2x");
+    i.setAttribute("id", title)
+    // i.style = "color: #ff6b6b";
 
     a.appendChild(img);
+    figure.appendChild(i)
+    
+    div.appendChild(a);
+    div.appendChild(figure)
 
-    section.appendChild(a);
+    section.appendChild(div)
 }
 
 const paintings = data.artObjects;
-let selectedPaintings = [];
 
-for(i = 0; i < paintings.length; i++){
-    let year = paintings[i].longTitle;
+for(i = 0; i < paintings.length; i++) {
+    let currentPainting = paintings[i];
+
+    if(passesAllCriteria(paintings[i])) {
+        displayPainting(currentPainting); 
+    }
+};
+
+function passesAllCriteria(painting) {
+    let year = painting.longTitle;
     year = year.substring(year.length - 4, year.length);
-
-    let title = paintings[i].principalOrFirstMaker;
-    let width = paintings[i].webImage.width;
-
-    if(width > 500 && year < 1800 &&  title !== "Gerard van Honthorst") {
-        selectedPaintings.push(paintings[i]);
-    };
+    let title = painting.principalOrFirstMaker;
+    let width = painting.webImage.width;
+    return (
+        width > 1500 && title !== "Gerard van Honthorst" && year < 1800
+    )
 };
 
-for(i = 0; i < selectedPaintings.length; i++) {
-    let currentPainting = selectedPaintings[i];
-    displayPainting(currentPainting); 
-};
+function findOrCreateLikeListFor(likes) {
+    let list = likes.getElementsByTagName("ul")[0];
+    if (list === undefined) {
+        list = document.createElement("ul");
+        likes.appendChild(list);   
+    }
+    return list;
+}
+
+let iElements = document.getElementsByTagName("i");
+iElementsArray = Array.from(iElements);
+
+
+let titlesClicked = [];
+iElementsArray.forEach(function(painting) {
+    painting.addEventListener("click", function() {
+        if (titlesClicked.includes(painting.id)) {
+            return null;
+        }
+        titlesClicked.push(painting.id);
+
+        const likes = document.getElementById("likes");
+        const list =  findOrCreateLikeListFor(likes);
+
+        const listItem = document.createElement("li");
+        listItem.textContent = painting.id;
+        list.appendChild(listItem);
+
+        painting.style = "color: #ff6b6b";
+    });
+});
+
+const likesDiv = document.createElement("div");
+const likes = document.getElementById("likes");
+
+likesDiv.textContent = titlesClicked.sp;
+likes.appendChild(likesDiv)
