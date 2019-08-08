@@ -375,12 +375,16 @@ let is = document.getElementsByTagName("i");
 isInArray = Array.from(is);
 
 
-// titlesClicked = [];
+let titlesClicked = [];
 isInArray.forEach(function(i) {
     i.addEventListener("click", function() {
-        console.log(i.id)
+        // console.log(i.id);
+        titlesClicked.push(i.id)
+
     });
 });
+
+console.log(titlesClicked)
 
 
 
