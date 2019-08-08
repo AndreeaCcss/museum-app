@@ -44,3 +44,11 @@ div {
 i {
     cursor: pointer;
 }
+
+#likes {
+    width: 60%;
+    
+}
+ul {
+    list-style: none;
+}
