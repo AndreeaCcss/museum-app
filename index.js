@@ -340,6 +340,7 @@ function displayPainting(painting) {
     img.setAttribute("class", "artObject");
     img.alt = title;
     i.setAttribute("class",  "fas fa-heart fa-2x");
+    i.setAttribute("id", title)
 
     a.appendChild(img);
     figure.appendChild(i)
@@ -374,14 +375,12 @@ let is = document.getElementsByTagName("i");
 isInArray = Array.from(is);
 
 
-titlesClicked = [];
+// titlesClicked = [];
 isInArray.forEach(function(i) {
     i.addEventListener("click", function() {
-        // titlesClicked.push()
-        console.log("hello")
+        console.log(i.id)
     });
 });
-
 
 
 
