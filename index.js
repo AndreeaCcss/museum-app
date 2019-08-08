@@ -371,14 +371,38 @@ function passesAllCriteria(painting) {
     )
 };
 
-let is = document.getElementsByTagName("i");
-isInArray = Array.from(is);
+function findOrCreateLikeListFor(likes) {
+    let list = likes.getElementsByTagName("ul")[0];
+    if (list === undefined) {
+        list = document.createElement("ul");
+        likes.appendChild(list);   
+    }
+    return list;
+}
+
+let iElements = document.getElementsByTagName("i");
+iElementsArray = Array.from(iElements);
 
 
 let titlesClicked = [];
-isInArray.forEach(function(i) {
-    i.addEventListener("click", function() {
-        // titlesClicked.push(i.id)
-        console.log(i.id)
+iElementsArray.forEach(function(painting) {
+    painting.addEventListener("click", function() {
+        if (titlesClicked.includes(painting.id)) {
+            return null;
+        }
+        titlesClicked.push(painting.id);
+
+        const likes = document.getElementById("likes");
+        const list =  findOrCreateLikeListFor(likes);
+
+        const listItem = document.createElement("li");
+        listItem.textContent = painting.id;
+        list.appendChild(listItem);
     });
 });
+
+const likesDiv = document.createElement("div");
+const likes = document.getElementById("likes");
+
+likesDiv.textContent = titlesClicked.sp;
+likes.appendChild(likesDiv)
