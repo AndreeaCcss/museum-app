@@ -378,13 +378,7 @@ isInArray = Array.from(is);
 let titlesClicked = [];
 isInArray.forEach(function(i) {
     i.addEventListener("click", function() {
-        // console.log(i.id);
-        titlesClicked.push(i.id)
-
+        // titlesClicked.push(i.id)
+        console.log(i.id)
     });
 });
-
-console.log(titlesClicked)
-
-
-
