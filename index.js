@@ -342,9 +342,22 @@ function displayPainting(painting) {
     section.appendChild(a);
 }
 
-const paintings = data.artObjects
+const paintings = data.artObjects;
+let selectedPaintings = [];
 
-for(i = 0; i < paintings.length; i++) {
-    let currentPainting = paintings[i];
+for(i = 0; i < paintings.length; i++){
+    let year = paintings[i].longTitle;
+    year = year.substring(year.length - 4, year.length);
+
+    let title = paintings[i].principalOrFirstMaker;
+    let width = paintings[i].webImage.width;
+
+    if(width > 500 && year < 1800 &&  title !== "Gerard van Honthorst") {
+        selectedPaintings.push(paintings[i]);
+    };
+};
+
+for(i = 0; i < selectedPaintings.length; i++) {
+    let currentPainting = selectedPaintings[i];
     displayPainting(currentPainting); 
-}
+};
